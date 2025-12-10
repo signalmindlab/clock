@@ -39,6 +39,26 @@
             min-height: 100vh;
             overflow: hidden;
             transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100vw;
+            height: 100vh;
+        }
+
+        body:fullscreen,
+        body:-webkit-full-screen,
+        body:-moz-full-screen,
+        body:-ms-fullscreen {
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+
+        html:fullscreen,
+        html:-webkit-full-screen,
+        html:-moz-full-screen,
+        html:-ms-fullscreen {
+            margin: 0;
+            padding: 0;
+            border: none;
         }
 
         .container {
@@ -50,6 +70,29 @@
             justify-content: center;
             align-items: center;
             gap: 3rem;
+        }
+
+        .clock-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .am-pm {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 900;
+            color: var(--text-color);
+            opacity: 0.7;
+            font-family: 'Orbitron', monospace;
+            user-select: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .am-pm.hidden {
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
         }
 
         .clock {
@@ -437,84 +480,89 @@
 </head>
 <body data-theme="dark">
     <div class="container">
-        <div class="clock" id="clock">
-            <!-- Hours -->
-            <div class="time-group">
-                <div class="flip-card" id="hour-tens">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <span class="digit">0</span>
+        <div class="clock-wrapper">
+            <div class="clock" id="clock">
+                <!-- Hours -->
+                <div class="time-group">
+                    <div class="flip-card" id="hour-tens">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="digit">0</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <span class="digit">0</span>
+                            </div>
                         </div>
-                        <div class="flip-card-back">
-                            <span class="digit">0</span>
+                    </div>
+                    <div class="flip-card" id="hour-ones">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="digit">0</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <span class="digit">0</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="flip-card" id="hour-ones">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <span class="digit">0</span>
+
+                <!-- Separator -->
+                <div class="separator">:</div>
+
+                <!-- Minutes -->
+                <div class="time-group">
+                    <div class="flip-card" id="minute-tens">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="digit">0</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <span class="digit">0</span>
+                            </div>
                         </div>
-                        <div class="flip-card-back">
-                            <span class="digit">0</span>
+                    </div>
+                    <div class="flip-card" id="minute-ones">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="digit">0</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <span class="digit">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Separator -->
+                <div class="separator">:</div>
+
+                <!-- Seconds -->
+                <div class="time-group">
+                    <div class="flip-card" id="second-tens">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="digit">0</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <span class="digit">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card" id="second-ones">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <span class="digit">0</span>
+                            </div>
+                            <div class="flip-card-back">
+                                <span class="digit">0</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Separator -->
-            <div class="separator">:</div>
-
-            <!-- Minutes -->
-            <div class="time-group">
-                <div class="flip-card" id="minute-tens">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <span class="digit">0</span>
-                        </div>
-                        <div class="flip-card-back">
-                            <span class="digit">0</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card" id="minute-ones">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <span class="digit">0</span>
-                        </div>
-                        <div class="flip-card-back">
-                            <span class="digit">0</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Separator -->
-            <div class="separator">:</div>
-
-            <!-- Seconds -->
-            <div class="time-group">
-                <div class="flip-card" id="second-tens">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <span class="digit">0</span>
-                        </div>
-                        <div class="flip-card-back">
-                            <span class="digit">0</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="flip-card" id="second-ones">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <span class="digit">0</span>
-                        </div>
-                        <div class="flip-card-back">
-                            <span class="digit">0</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
+            <!-- AM/PM Indicator -->
+            <div class="am-pm hidden" id="am-pm">AM</div>
         </div>
     </div>
 
@@ -537,6 +585,9 @@
         <button class="control-btn hidden" id="show-font-control" title="Show font size control (S)">
             Aa
         </button>
+        <button class="control-btn" id="format-toggle" title="Toggle 12h/24h format (H)">
+            24h
+        </button>
         <button class="control-btn" id="theme-toggle" title="Toggle Dark/Light Mode (T)">
             🌓
         </button>
@@ -547,7 +598,7 @@
 
     <!-- Keyboard hint -->
     <div class="hint">
-        Press F for fullscreen • T for theme • S for font size • +/− to adjust • ESC to exit
+        F: fullscreen • T: theme • H: 12h/24h • S: font size • +/−: adjust
     </div>
 
     <script>
@@ -563,6 +614,7 @@
                 };
                 
                 this.currentTime = { h1: 0, h2: 0, m1: 0, m2: 0, s1: 0, s2: 0 };
+                this.is24Hour = true; // Default to 24-hour format
                 this.init();
             }
 
@@ -576,17 +628,36 @@
 
             updateTime() {
                 const now = new Date();
-                const hours = String(now.getHours()).padStart(2, '0');
-                const minutes = String(now.getMinutes()).padStart(2, '0');
-                const seconds = String(now.getSeconds()).padStart(2, '0');
+                let hours = now.getHours();
+                const minutes = now.getMinutes();
+                const seconds = now.getSeconds();
+                
+                const ampmElement = document.getElementById('am-pm');
+                
+                // Handle 12-hour format
+                if (!this.is24Hour) {
+                    const ampm = hours >= 12 ? 'PM' : 'AM';
+                    ampmElement.textContent = ampm;
+                    ampmElement.classList.remove('hidden');
+                    
+                    // Convert to 12-hour format
+                    hours = hours % 12;
+                    hours = hours ? hours : 12; // 0 should be 12
+                } else {
+                    ampmElement.classList.add('hidden');
+                }
+
+                const hoursStr = String(hours).padStart(2, '0');
+                const minutesStr = String(minutes).padStart(2, '0');
+                const secondsStr = String(seconds).padStart(2, '0');
 
                 const newTime = {
-                    h1: parseInt(hours[0]),
-                    h2: parseInt(hours[1]),
-                    m1: parseInt(minutes[0]),
-                    m2: parseInt(minutes[1]),
-                    s1: parseInt(seconds[0]),
-                    s2: parseInt(seconds[1])
+                    h1: parseInt(hoursStr[0]),
+                    h2: parseInt(hoursStr[1]),
+                    m1: parseInt(minutesStr[0]),
+                    m2: parseInt(minutesStr[1]),
+                    s1: parseInt(secondsStr[0]),
+                    s2: parseInt(secondsStr[1])
                 };
 
                 // Update each digit if it has changed
@@ -633,6 +704,10 @@
                 // Theme toggle
                 const themeToggle = document.getElementById('theme-toggle');
                 themeToggle.addEventListener('click', () => this.toggleTheme());
+
+                // Format toggle (12h/24h)
+                const formatToggle = document.getElementById('format-toggle');
+                formatToggle.addEventListener('click', () => this.toggleFormat());
 
                 // Fullscreen toggle
                 const fullscreenToggle = document.getElementById('fullscreen-toggle');
@@ -685,6 +760,15 @@
                 });
             }
 
+            toggleFormat() {
+                this.is24Hour = !this.is24Hour;
+                const formatBtn = document.getElementById('format-toggle');
+                formatBtn.textContent = this.is24Hour ? '24h' : '12h';
+                
+                // Force immediate update to show new format
+                this.updateTime();
+            }
+
             toggleTheme() {
                 const body = document.body;
                 const currentTheme = body.getAttribute('data-theme');
@@ -727,6 +811,12 @@
                     if (e.key === 't' || e.key === 'T') {
                         e.preventDefault();
                         this.toggleTheme();
+                    }
+
+                    // H key for 12h/24h format toggle
+                    if (e.key === 'h' || e.key === 'H') {
+                        e.preventDefault();
+                        this.toggleFormat();
                     }
 
                     // S key to show/hide font size control
