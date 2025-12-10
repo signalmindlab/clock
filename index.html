@@ -76,23 +76,24 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1.5rem;
+            gap: 0rem;
         }
 
         .am-pm {
-            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-size: clamp(1rem, 2vw, 1.5rem);
             font-weight: 900;
             color: var(--text-color);
-            opacity: 0.7;
+            opacity: 0.6;
             font-family: 'Orbitron', monospace;
             user-select: none;
             transition: opacity 0.3s ease;
+            margin-bottom: 0.5rem;
+            align-self: flex-start;
+            margin-left: 0.5rem;
         }
 
         .am-pm.hidden {
-            opacity: 0;
-            height: 0;
-            overflow: hidden;
+            display: none;
         }
 
         .clock {
@@ -598,6 +599,9 @@
 <body data-theme="dark">
     <div class="container">
         <div class="clock-wrapper">
+            <!-- AM/PM Indicator -->
+            <div class="am-pm hidden" id="am-pm">AM</div>
+            
             <div class="clock" id="clock">
                 <!-- Hours -->
                 <div class="time-group">
@@ -677,24 +681,7 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- AM/PM Indicator -->
-            <div class="am-pm hidden" id="am-pm">AM</div>
         </div>
-    </div>
-
-    <!-- Font Size Control -->
-    <div class="font-size-control" id="font-size-control">
-        <div class="control-header">
-            <div class="font-size-label">Font Size</div>
-            <button class="close-btn" id="close-font-control" title="Hide font size control">✕</button>
-        </div>
-        <div class="slider-container">
-            <button class="size-btn" id="decrease-size" title="Decrease font size">−</button>
-            <input type="range" min="0.6" max="1.4" step="0.05" value="1" class="slider" id="font-size-slider">
-            <button class="size-btn" id="increase-size" title="Increase font size">+</button>
-        </div>
-        <div class="size-value" id="size-value">100%</div>
     </div>
 
     <!-- Controls -->
