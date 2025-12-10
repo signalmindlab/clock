@@ -54,19 +54,19 @@
 
         .clock {
             display: flex;
-            gap: clamp(1rem, 3vw, 2rem);
+            gap: clamp(0.5rem, 2vw, 1.2rem);
             align-items: center;
             perspective: 1000px;
         }
 
         .time-group {
             display: flex;
-            gap: clamp(0.5rem, 1.5vw, 1rem);
+            gap: clamp(0.3rem, 1vw, 0.6rem);
         }
 
         .flip-card {
             position: relative;
-            width: clamp(100px, 18vw, 220px);
+            width: clamp(70px, 13vw, 160px);
             height: clamp(150px, 26vw, 320px);
             perspective: 1000px;
         }
@@ -179,6 +179,41 @@
             box-shadow: 0 4px 12px var(--card-shadow);
             z-index: 1000;
             min-width: 200px;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .font-size-control.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(-20px);
+        }
+
+        .control-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.6;
+            transition: all 0.2s ease;
+            border-radius: 4px;
+        }
+
+        .close-btn:hover {
+            opacity: 1;
+            background: var(--separator-color);
         }
 
         .font-size-label {
@@ -282,6 +317,12 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 1.5rem;
             box-shadow: 0 4px 12px var(--card-shadow);
+        }
+
+        .control-btn.hidden {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.8);
         }
 
         .control-btn:hover {
@@ -478,8 +519,11 @@
     </div>
 
     <!-- Font Size Control -->
-    <div class="font-size-control">
-        <div class="font-size-label">Font Size</div>
+    <div class="font-size-control" id="font-size-control">
+        <div class="control-header">
+            <div class="font-size-label">Font Size</div>
+            <button class="close-btn" id="close-font-control" title="Hide font size control">✕</button>
+        </div>
         <div class="slider-container">
             <button class="size-btn" id="decrease-size" title="Decrease font size">−</button>
             <input type="range" min="0.6" max="1.4" step="0.05" value="1" class="slider" id="font-size-slider">
@@ -490,6 +534,9 @@
 
     <!-- Controls -->
     <div class="controls">
+        <button class="control-btn hidden" id="show-font-control" title="Show font size control (S)">
+            Aa
+        </button>
         <button class="control-btn" id="theme-toggle" title="Toggle Dark/Light Mode (T)">
             🌓
         </button>
@@ -500,7 +547,7 @@
 
     <!-- Keyboard hint -->
     <div class="hint">
-        Press F for fullscreen • T for theme • +/− for font size • ESC to exit
+        Press F for fullscreen • T for theme • S for font size • +/− to adjust • ESC to exit
     </div>
 
     <script>
@@ -600,6 +647,9 @@
                 const decreaseBtn = document.getElementById('decrease-size');
                 const increaseBtn = document.getElementById('increase-size');
                 const sizeValue = document.getElementById('size-value');
+                const fontControl = document.getElementById('font-size-control');
+                const closeBtn = document.getElementById('close-font-control');
+                const showBtn = document.getElementById('show-font-control');
 
                 const updateFontSize = (value) => {
                     document.documentElement.style.setProperty('--font-size-multiplier', value);
@@ -620,6 +670,18 @@
                     const newValue = Math.min(1.4, parseFloat(slider.value) + 0.1);
                     slider.value = newValue;
                     updateFontSize(newValue);
+                });
+
+                // Hide font size control
+                closeBtn.addEventListener('click', () => {
+                    fontControl.classList.add('hidden');
+                    showBtn.classList.remove('hidden');
+                });
+
+                // Show font size control
+                showBtn.addEventListener('click', () => {
+                    fontControl.classList.remove('hidden');
+                    showBtn.classList.add('hidden');
                 });
             }
 
@@ -665,6 +727,21 @@
                     if (e.key === 't' || e.key === 'T') {
                         e.preventDefault();
                         this.toggleTheme();
+                    }
+
+                    // S key to show/hide font size control
+                    if (e.key === 's' || e.key === 'S') {
+                        e.preventDefault();
+                        const fontControl = document.getElementById('font-size-control');
+                        const showBtn = document.getElementById('show-font-control');
+                        
+                        if (fontControl.classList.contains('hidden')) {
+                            fontControl.classList.remove('hidden');
+                            showBtn.classList.add('hidden');
+                        } else {
+                            fontControl.classList.add('hidden');
+                            showBtn.classList.remove('hidden');
+                        }
                     }
 
                     // + key to increase font size
