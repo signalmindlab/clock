@@ -203,60 +203,132 @@
             position: fixed;
             top: 2rem;
             right: 2rem;
-            display: flex;
-            gap: 1rem;
             z-index: 1000;
         }
 
-        .font-size-control {
-            position: fixed;
-            top: 2rem;
-            left: 2rem;
+        .settings-menu {
+            position: absolute;
+            top: 70px;
+            right: 0;
             background: var(--card-bg);
             border: 2px solid var(--separator-color);
             border-radius: 12px;
-            padding: 1rem 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            box-shadow: 0 4px 12px var(--card-shadow);
-            z-index: 1000;
-            min-width: 200px;
+            padding: 1.5rem;
+            min-width: 280px;
+            box-shadow: 0 8px 24px var(--card-shadow);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-10px);
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
-        .font-size-control.hidden {
-            opacity: 0;
-            pointer-events: none;
-            transform: translateX(-20px);
+        .settings-menu.visible {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
         }
 
-        .control-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .menu-section {
+            margin-bottom: 1.5rem;
         }
 
-        .close-btn {
-            background: transparent;
-            border: none;
+        .menu-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .menu-label {
             color: var(--text-color);
+            font-size: 0.85rem;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .menu-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .menu-btn {
+            flex: 1;
+            min-width: 80px;
+            background: var(--card-bg);
+            border: 2px solid var(--separator-color);
+            color: var(--text-color);
+            padding: 0.75rem;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1.2rem;
-            padding: 0;
-            width: 24px;
-            height: 24px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0.6;
-            transition: all 0.2s ease;
-            border-radius: 4px;
+            gap: 0.5rem;
         }
 
-        .close-btn:hover {
-            opacity: 1;
-            background: var(--separator-color);
+        .menu-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--card-shadow);
+            border-color: var(--text-color);
+        }
+
+        .menu-btn:active {
+            transform: translateY(0);
+        }
+
+        .menu-btn.active {
+            background: var(--text-color);
+            color: var(--bg-color);
+            border-color: var(--text-color);
+        }
+
+        .font-size-control {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .size-btn {
+            background: var(--card-bg);
+            border: 2px solid var(--separator-color);
+            color: var(--text-color);
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .size-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 8px var(--card-shadow);
+        }
+
+        .size-btn:active {
+            transform: scale(0.95);
+        }
+
+        .size-value {
+            color: var(--text-color);
+            font-size: 0.75rem;
+            font-family: 'Orbitron', monospace;
+            text-align: center;
+            opacity: 0.7;
         }
 
         .font-size-label {
@@ -362,10 +434,58 @@
             box-shadow: 0 4px 12px var(--card-shadow);
         }
 
-        .control-btn.hidden {
-            opacity: 0;
-            pointer-events: none;
-            transform: scale(0.8);
+        .control-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px var(--card-shadow);
+        }
+
+        .control-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .control-btn.active {
+            background: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        .slider {
+            flex: 1;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--separator-color);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--text-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--text-color);
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .slider::-moz-range-thumb:hover {
+            transform: scale(1.2);
         }
 
         .control-btn:hover {
@@ -412,12 +532,9 @@
                 right: 1rem;
             }
 
-            .font-size-control {
-                top: auto;
-                bottom: 5rem;
-                left: 50%;
-                transform: translateX(-50%);
-                min-width: 280px;
+            .settings-menu {
+                right: 0;
+                min-width: 260px;
             }
 
             .control-btn {
@@ -446,9 +563,9 @@
                 height: 40px;
             }
 
-            .font-size-control {
-                min-width: 250px;
-                padding: 0.75rem 1rem;
+            .settings-menu {
+                min-width: 240px;
+                padding: 1rem;
             }
         }
 
@@ -582,23 +699,58 @@
 
     <!-- Controls -->
     <div class="controls">
-        <button class="control-btn hidden" id="show-font-control" title="Show font size control (S)">
-            Aa
+        <button class="control-btn" id="settings-toggle" title="Settings (G)">
+            ⚙️
         </button>
-        <button class="control-btn" id="format-toggle" title="Toggle 12h/24h format (H)">
-            24h
-        </button>
-        <button class="control-btn" id="theme-toggle" title="Toggle Dark/Light Mode (T)">
-            🌓
-        </button>
-        <button class="control-btn" id="fullscreen-toggle" title="Toggle Fullscreen (F)">
-            ⛶
-        </button>
+        
+        <!-- Settings Menu -->
+        <div class="settings-menu" id="settings-menu">
+            <!-- Font Size -->
+            <div class="menu-section">
+                <div class="menu-label">Font Size</div>
+                <div class="font-size-control">
+                    <div class="slider-container">
+                        <button class="size-btn" id="decrease-size">−</button>
+                        <input type="range" min="0.6" max="1.4" step="0.05" value="1" class="slider" id="font-size-slider">
+                        <button class="size-btn" id="increase-size">+</button>
+                    </div>
+                    <div class="size-value" id="size-value">100%</div>
+                </div>
+            </div>
+
+            <!-- Time Format -->
+            <div class="menu-section">
+                <div class="menu-label">Time Format</div>
+                <div class="menu-buttons">
+                    <button class="menu-btn active" id="format-24h" data-format="24">24h</button>
+                    <button class="menu-btn" id="format-12h" data-format="12">12h</button>
+                </div>
+            </div>
+
+            <!-- Theme -->
+            <div class="menu-section">
+                <div class="menu-label">Theme</div>
+                <div class="menu-buttons">
+                    <button class="menu-btn active" id="theme-dark" data-theme="dark">🌙 Dark</button>
+                    <button class="menu-btn" id="theme-light" data-theme="light">☀️ Light</button>
+                </div>
+            </div>
+
+            <!-- Fullscreen -->
+            <div class="menu-section">
+                <div class="menu-label">Display</div>
+                <div class="menu-buttons">
+                    <button class="menu-btn" id="fullscreen-toggle" style="flex: 1 1 100%;">
+                        ⛶ Fullscreen
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Keyboard hint -->
     <div class="hint">
-        F: fullscreen • T: theme • H: 12h/24h • S: font size • +/−: adjust
+        F: fullscreen • T: theme • H: 12h/24h • G: settings • +/−: font size
     </div>
 
     <script>
@@ -701,17 +853,66 @@
             }
 
             setupControls() {
-                // Theme toggle
-                const themeToggle = document.getElementById('theme-toggle');
-                themeToggle.addEventListener('click', () => this.toggleTheme());
+                const settingsToggle = document.getElementById('settings-toggle');
+                const settingsMenu = document.getElementById('settings-menu');
 
-                // Format toggle (12h/24h)
-                const formatToggle = document.getElementById('format-toggle');
-                formatToggle.addEventListener('click', () => this.toggleFormat());
+                // Toggle settings menu
+                settingsToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    settingsMenu.classList.toggle('visible');
+                    settingsToggle.classList.toggle('active');
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!settingsMenu.contains(e.target) && e.target !== settingsToggle) {
+                        settingsMenu.classList.remove('visible');
+                        settingsToggle.classList.remove('active');
+                    }
+                });
+
+                // Theme buttons
+                const themeDark = document.getElementById('theme-dark');
+                const themeLight = document.getElementById('theme-light');
+                
+                themeDark.addEventListener('click', () => {
+                    document.body.setAttribute('data-theme', 'dark');
+                    themeDark.classList.add('active');
+                    themeLight.classList.remove('active');
+                });
+                
+                themeLight.addEventListener('click', () => {
+                    document.body.setAttribute('data-theme', 'light');
+                    themeLight.classList.add('active');
+                    themeDark.classList.remove('active');
+                });
+
+                // Format buttons (12h/24h)
+                const format24h = document.getElementById('format-24h');
+                const format12h = document.getElementById('format-12h');
+                
+                format24h.addEventListener('click', () => {
+                    this.is24Hour = true;
+                    format24h.classList.add('active');
+                    format12h.classList.remove('active');
+                    this.updateTime();
+                });
+                
+                format12h.addEventListener('click', () => {
+                    this.is24Hour = false;
+                    format12h.classList.add('active');
+                    format24h.classList.remove('active');
+                    this.updateTime();
+                });
 
                 // Fullscreen toggle
                 const fullscreenToggle = document.getElementById('fullscreen-toggle');
-                fullscreenToggle.addEventListener('click', () => this.toggleFullscreen());
+                fullscreenToggle.addEventListener('click', () => {
+                    this.toggleFullscreen();
+                    // Close menu after fullscreen
+                    settingsMenu.classList.remove('visible');
+                    settingsToggle.classList.remove('active');
+                });
 
                 // Listen for fullscreen changes
                 document.addEventListener('fullscreenchange', () => this.handleFullscreenChange());
@@ -722,9 +923,6 @@
                 const decreaseBtn = document.getElementById('decrease-size');
                 const increaseBtn = document.getElementById('increase-size');
                 const sizeValue = document.getElementById('size-value');
-                const fontControl = document.getElementById('font-size-control');
-                const closeBtn = document.getElementById('close-font-control');
-                const showBtn = document.getElementById('show-font-control');
 
                 const updateFontSize = (value) => {
                     document.documentElement.style.setProperty('--font-size-multiplier', value);
@@ -746,24 +944,20 @@
                     slider.value = newValue;
                     updateFontSize(newValue);
                 });
-
-                // Hide font size control
-                closeBtn.addEventListener('click', () => {
-                    fontControl.classList.add('hidden');
-                    showBtn.classList.remove('hidden');
-                });
-
-                // Show font size control
-                showBtn.addEventListener('click', () => {
-                    fontControl.classList.remove('hidden');
-                    showBtn.classList.add('hidden');
-                });
             }
 
             toggleFormat() {
                 this.is24Hour = !this.is24Hour;
-                const formatBtn = document.getElementById('format-toggle');
-                formatBtn.textContent = this.is24Hour ? '24h' : '12h';
+                const format24h = document.getElementById('format-24h');
+                const format12h = document.getElementById('format-12h');
+                
+                if (this.is24Hour) {
+                    format24h.classList.add('active');
+                    format12h.classList.remove('active');
+                } else {
+                    format12h.classList.add('active');
+                    format24h.classList.remove('active');
+                }
                 
                 // Force immediate update to show new format
                 this.updateTime();
@@ -774,6 +968,17 @@
                 const currentTheme = body.getAttribute('data-theme');
                 const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
                 body.setAttribute('data-theme', newTheme);
+                
+                const themeDark = document.getElementById('theme-dark');
+                const themeLight = document.getElementById('theme-light');
+                
+                if (newTheme === 'dark') {
+                    themeDark.classList.add('active');
+                    themeLight.classList.remove('active');
+                } else {
+                    themeLight.classList.add('active');
+                    themeDark.classList.remove('active');
+                }
             }
 
             toggleFullscreen() {
@@ -819,19 +1024,14 @@
                         this.toggleFormat();
                     }
 
-                    // S key to show/hide font size control
-                    if (e.key === 's' || e.key === 'S') {
+                    // G key to toggle settings menu
+                    if (e.key === 'g' || e.key === 'G') {
                         e.preventDefault();
-                        const fontControl = document.getElementById('font-size-control');
-                        const showBtn = document.getElementById('show-font-control');
+                        const settingsMenu = document.getElementById('settings-menu');
+                        const settingsToggle = document.getElementById('settings-toggle');
                         
-                        if (fontControl.classList.contains('hidden')) {
-                            fontControl.classList.remove('hidden');
-                            showBtn.classList.add('hidden');
-                        } else {
-                            fontControl.classList.add('hidden');
-                            showBtn.classList.remove('hidden');
-                        }
+                        settingsMenu.classList.toggle('visible');
+                        settingsToggle.classList.toggle('active');
                     }
 
                     // + key to increase font size
