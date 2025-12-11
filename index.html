@@ -287,6 +287,19 @@
             border-color: var(--text-color);
         }
 
+        /* Theme-specific active states */
+        #theme-dark.active {
+            background: #000000;
+            color: #ffffff;
+            border-color: #000000;
+        }
+
+        #theme-light.active {
+            background: #f5f5f5;
+            color: #000000;
+            border-color: #f5f5f5;
+        }
+
         .font-size-control {
             display: flex;
             flex-direction: column;
@@ -719,7 +732,7 @@
                 <div class="menu-label">Theme</div>
                 <div class="menu-buttons">
                     <button class="menu-btn active" id="theme-dark" data-theme="dark">🌙 Dark</button>
-                    <button class="menu-btn" id="theme-light" data-theme="light">☀️ Light</button>
+                    <button class="menu-btn" id="theme-light" data-theme="light">☀ Light</button>
                 </div>
             </div>
 
