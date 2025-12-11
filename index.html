@@ -687,7 +687,7 @@
     <!-- Controls -->
     <div class="controls">
         <button class="control-btn" id="settings-toggle" title="Settings (G)">
-            ⚙️
+            âš™ï¸
         </button>
         
         <!-- Settings Menu -->
@@ -697,7 +697,7 @@
                 <div class="menu-label">Font Size</div>
                 <div class="font-size-control">
                     <div class="slider-container">
-                        <button class="size-btn" id="decrease-size">−</button>
+                        <button class="size-btn" id="decrease-size">âˆ’</button>
                         <input type="range" min="0.6" max="1.4" step="0.05" value="1" class="slider" id="font-size-slider">
                         <button class="size-btn" id="increase-size">+</button>
                     </div>
@@ -718,8 +718,8 @@
             <div class="menu-section">
                 <div class="menu-label">Theme</div>
                 <div class="menu-buttons">
-                    <button class="menu-btn active" id="theme-dark" data-theme="dark">🌙 Dark</button>
-                    <button class="menu-btn" id="theme-light" data-theme="light">☀️ Light</button>
+                    <button class="menu-btn active" id="theme-dark" data-theme="dark">ðŸŒ™ Dark</button>
+                    <button class="menu-btn" id="theme-light" data-theme="light">â˜€ï¸ Light</button>
                 </div>
             </div>
 
@@ -728,8 +728,18 @@
                 <div class="menu-label">Display</div>
                 <div class="menu-buttons">
                     <button class="menu-btn" id="fullscreen-toggle" style="flex: 1 1 100%;">
-                        ⛶ Fullscreen
+                        â›¶ Fullscreen
                     </button>
+                </div>
+            </div>
+
+            <!-- Help & Documentation -->
+            <div class="menu-section">
+                <div class="menu-label">Help</div>
+                <div class="menu-buttons">
+                    <a href="Flip%20Clock%20-%20Help%20%26%20Documentation.html" target="_blank" class="menu-btn" style="flex: 1 1 100%; text-decoration: none;">
+                        📖 Documentation
+                    </a>
                 </div>
             </div>
         </div>
@@ -737,7 +747,7 @@
 
     <!-- Keyboard hint -->
     <div class="hint">
-        F: fullscreen • T: theme • H: 12h/24h • G: settings • +/−: font size
+        F: fullscreen â€¢ T: theme â€¢ H: 12h/24h â€¢ G: settings â€¢ +/âˆ’: font size
     </div>
 
     <script>
@@ -983,10 +993,10 @@
             handleFullscreenChange() {
                 const fullscreenBtn = document.getElementById('fullscreen-toggle');
                 if (document.fullscreenElement) {
-                    fullscreenBtn.textContent = '⛶';
+                    fullscreenBtn.textContent = 'â›¶';
                     fullscreenBtn.title = 'Exit Fullscreen (ESC or F)';
                 } else {
-                    fullscreenBtn.textContent = '⛶';
+                    fullscreenBtn.textContent = 'â›¶';
                     fullscreenBtn.title = 'Toggle Fullscreen (F)';
                 }
             }
