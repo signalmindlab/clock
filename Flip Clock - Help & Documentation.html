@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<!-- saved from url=(0056)file:///C:/Users/DK82SL88/Downloads/flip-clock-help.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Clock - Help &amp; Documentation</title>
+    <link href="./Flip Clock - Help &amp; Documentation_files/css2" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e4e4e7;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(26, 26, 46, 0.8);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #60a5fa;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #60a5fa;
+            margin: 2.5rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #334155;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #93c5fd;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
+
+        .key {
+            display: inline-block;
+            background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+            color: #f1f5f9;
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: 2px solid #475569;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            margin: 0 0.2rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .feature-card {
+            background: rgba(51, 65, 85, 0.4);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(96, 165, 250, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: #93c5fd;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .feature-desc {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: rgba(51, 65, 85, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th {
+            background: #334155;
+            color: #93c5fd;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background: rgba(96, 165, 250, 0.1);
+        }
+
+        .tip {
+            background: rgba(96, 165, 250, 0.1);
+            border-left: 4px solid #60a5fa;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .tip-title {
+            font-weight: 600;
+            color: #60a5fa;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip p {
+            margin: 0;
+        }
+
+        .warning {
+            background: rgba(251, 191, 36, 0.1);
+            border-left: 4px solid #fbbf24;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .warning-title {
+            font-weight: 600;
+            color: #fbbf24;
+            margin-bottom: 0.5rem;
+        }
+
+        .button-demo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #334155;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            margin: 0.25rem;
+            border: 2px solid #475569;
+        }
+
+        .button-icon {
+            font-size: 1.2rem;
+        }
+
+        ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        li {
+            margin: 0.5rem 0;
+            color: #cbd5e1;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .back-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(96, 165, 250, 0.4);
+        }
+
+        code {
+            background: rgba(51, 65, 85, 0.5);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #93c5fd;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🕐 Flip Clock</h1>
+        <p class="subtitle">Complete Help &amp; Documentation Guide</p>
+
+        <h2>📋 Overview</h2>
+        <p>A beautiful, responsive flip-clock style digital clock inspired by Fliqlo. Features smooth 3D flip animations, customizable appearance, and multiple display modes. Perfect for use as a desktop clock, screensaver, or presentation timer.</p>
+
+        <h2>✨ Key Features</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <div class="feature-title">Smooth Flip Animation</div>
+                <p class="feature-desc">Realistic 3D card-flip effect for each digit change with smooth transitions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌓</div>
+                <div class="feature-title">Dark &amp; Light Modes</div>
+                <p class="feature-desc">Seamless switching between dark (black/white) and light (white/black) themes.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⛶</div>
+                <div class="feature-title">Fullscreen Mode</div>
+                <p class="feature-desc">Edge-to-edge display with no boundaries for immersive viewing experience.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🕐</div>
+                <div class="feature-title">12h/24h Format</div>
+                <p class="feature-desc">Toggle between 12-hour (with AM/PM) and 24-hour time formats.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">Aa</div>
+                <div class="feature-title">Adjustable Font Size</div>
+                <p class="feature-desc">Customize digit size from 60% to 140% with smooth scaling.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⏱️</div>
+                <div class="feature-title">Seconds Display</div>
+                <p class="feature-desc">Full HH:MM:SS display with individual flip animations for each digit.</p>
+            </div>
+        </div>
+
+        <h2>⌨️ Keyboard Shortcuts</h2>
+        <p>Quick access to all features using your keyboard:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th>Action</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="key">F</span></td>
+                    <td>Toggle Fullscreen</td>
+                    <td>Enter or exit fullscreen mode</td>
+                </tr>
+                <tr>
+                    <td><span class="key">ESC</span></td>
+                    <td>Exit Fullscreen</td>
+                    <td>Quick exit from fullscreen mode</td>
+                </tr>
+                <tr>
+                    <td><span class="key">T</span></td>
+                    <td>Toggle Theme</td>
+                    <td>Switch between Dark and Light mode</td>
+                </tr>
+                <tr>
+                    <td><span class="key">H</span></td>
+                    <td>Toggle Hour Format</td>
+                    <td>Switch between 12-hour and 24-hour format</td>
+                </tr>
+                <tr>
+                    <td><span class="key">S</span></td>
+                    <td>Show/Hide Font Settings</td>
+                    <td>Toggle font size control panel visibility</td>
+                </tr>
+                <tr>
+                    <td><span class="key">+</span> or <span class="key">=</span></td>
+                    <td>Increase Font Size</td>
+                    <td>Make the clock digits larger (10% increment)</td>
+                </tr>
+                <tr>
+                    <td><span class="key">-</span> or <span class="key">_</span></td>
+                    <td>Decrease Font Size</td>
+                    <td>Make the clock digits smaller (10% increment)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>🎛️ Control Buttons</h2>
+        <p>Visual controls located in the top-right corner:</p>
+
+        <h3>Button Overview</h3>
+        <ul>
+            <li><span class="button-demo"><span class="button-icon">Aa</span> Font Size</span> - Opens the font size control panel (appears when panel is hidden)</li>
+            <li><span class="button-demo"><span class="button-icon">24h</span> or <span class="button-icon">12h</span></span> - Shows current time format, click to toggle</li>
+            <li><span class="button-demo"><span class="button-icon">🌓</span> Theme</span> - Toggle between Dark and Light mode</li>
+            <li><span class="button-demo"><span class="button-icon">⛶</span> Fullscreen</span> - Enter/exit fullscreen mode</li>
+        </ul>
+
+        <h2>🎨 Font Size Customization</h2>
+        <p>The font size control panel (top-left) provides multiple ways to adjust the clock size:</p>
+
+        <h3>Adjustment Methods</h3>
+        <ul>
+            <li><strong>Slider:</strong> Drag for precise control (60% - 140%)</li>
+            <li><strong>− and + Buttons:</strong> Quick adjustments in 10% increments</li>
+            <li><strong>Keyboard:</strong> Press <span class="key">+</span> or <span class="key">-</span> keys</li>
+            <li><strong>Close Button (✕):</strong> Hide the panel after setting your preferred size</li>
+        </ul>
+
+        <div class="tip">
+            <div class="tip-title">💡 Pro Tip</div>
+            <p>Once you've set your desired font size, click the ✕ button to hide the control panel for a cleaner display. Press <span class="key">S</span> anytime to bring it back!</p>
+        </div>
+
+        <h2>🕐 Time Format Options</h2>
+        
+        <h3>24-Hour Format (Default)</h3>
+        <ul>
+            <li>Displays hours from 00 to 23</li>
+            <li>Military/International time format</li>
+            <li>No AM/PM indicator</li>
+            <li>Example: 14:30:45</li>
+        </ul>
+
+        <h3>12-Hour Format</h3>
+        <ul>
+            <li>Displays hours from 12, 01-11</li>
+            <li>Shows AM/PM indicator below the clock</li>
+            <li>Midnight displays as 12:00 AM</li>
+            <li>Noon displays as 12:00 PM</li>
+            <li>Example: 02:30:45 PM</li>
+        </ul>
+
+        <h2>🎭 Theme Modes</h2>
+
+        <h3>Dark Mode (Default)</h3>
+        <ul>
+            <li>Black background (#000000)</li>
+            <li>White digits and text (#FFFFFF)</li>
+            <li>Dark gray card backgrounds</li>
+            <li>Perfect for nighttime viewing</li>
+        </ul>
+
+        <h3>Light Mode</h3>
+        <ul>
+            <li>Light gray background (#F5F5F5)</li>
+            <li>Black digits and text (#000000)</li>
+            <li>White card backgrounds</li>
+            <li>Ideal for bright environments</li>
+        </ul>
+
+        <h2>📱 Responsive Design</h2>
+        <p>The flip clock automatically adapts to different screen sizes:</p>
+        <ul>
+            <li><strong>Desktop:</strong> Large, prominent display with all controls visible</li>
+            <li><strong>Tablet:</strong> Optimized card and font sizes for medium screens</li>
+            <li><strong>Mobile:</strong> Compact layout with repositioned font controls</li>
+            <li><strong>Fullscreen:</strong> Maximum size display utilizing entire viewport</li>
+        </ul>
+
+        <h2>🚀 Quick Start Guide</h2>
+        <ol style="margin-left: 2rem;">
+            <li>Open <code>flip-clock.html</code> in any modern web browser</li>
+            <li>The clock starts automatically in 24-hour format with dark mode</li>
+            <li>Press <span class="key">F</span> to enter fullscreen for best experience</li>
+            <li>Press <span class="key">H</span> to switch to 12-hour format if preferred</li>
+            <li>Press <span class="key">T</span> to change theme based on your environment</li>
+            <li>Use <span class="key">+</span> or <span class="key">-</span> to adjust size to your preference</li>
+            <li>Press <span class="key">S</span> to hide the font control panel</li>
+        </ol>
+
+        <h2>💡 Usage Tips</h2>
+
+        <div class="tip">
+            <div class="tip-title">🖥️ Use as Desktop Clock</div>
+            <p>Open in your browser, press <span class="key">F</span> for fullscreen, adjust size with <span class="key">+</span>/<span class="key">-</span>, then hide controls with <span class="key">S</span>. Perfect minimal desktop clock!</p>
+        </div>
+
+        <div class="tip">
+            <div class="tip-title">📊 Presentation Timer</div>
+            <p>Display the clock on a second screen during presentations. The large digits are visible from across the room.</p>
+        </div>
+
+        <div class="tip">
+            <div class="tip-title">😴 Bedside Clock</div>
+            <p>Use Dark Mode for comfortable nighttime viewing. The smooth animations are easy on the eyes.</p>
+        </div>
+
+        <div class="tip">
+            <div class="tip-title">⌚ Multiple Time Zones</div>
+            <p>Open multiple browser tabs or windows to display different time zones simultaneously (requires system timezone adjustment).</p>
+        </div>
+
+        <h2>🔧 Browser Compatibility</h2>
+        <p>The flip clock works in all modern browsers:</p>
+        <ul>
+            <li>✅ Chrome/Edge (v90+)</li>
+            <li>✅ Firefox (v88+)</li>
+            <li>✅ Safari (v14+)</li>
+            <li>✅ Opera (v76+)</li>
+        </ul>
+
+        <div class="warning">
+            <div class="warning-title">⚠️ Note</div>
+            <p>Fullscreen functionality requires user interaction (button click or keyboard press). Browsers block automatic fullscreen for security reasons.</p>
+        </div>
+
+        <h2>❓ Troubleshooting</h2>
+
+        <h3>Clock not updating?</h3>
+        <p>Refresh the page (F5 or Ctrl+R). Ensure JavaScript is enabled in your browser.</p>
+
+        <h3>Fullscreen not working?</h3>
+        <p>Some browsers require specific permissions. Check your browser settings or try the <span class="key">F</span> key instead of the button.</p>
+
+        <h3>Animations stuttering?</h3>
+        <p>Close other tabs or applications to free up system resources. Hardware acceleration in browser settings may help.</p>
+
+        <h3>Font size not changing?</h3>
+        <p>Make sure you're not at the minimum (60%) or maximum (140%) limit. Try using the slider for fine control.</p>
+
+        <h3>Controls not visible?</h3>
+        <p>Press <span class="key">S</span> to show the font control panel, or check if you're in fullscreen mode where controls are positioned differently.</p>
+
+        <h2>🎨 Customization Notes</h2>
+        <p>For advanced users who want to modify the clock:</p>
+        <ul>
+            <li><strong>Colors:</strong> Edit CSS variables in the <code>:root</code> section</li>
+            <li><strong>Font:</strong> Change "Orbitron" to any Google Font or system font</li>
+            <li><strong>Animation Speed:</strong> Adjust the 0.6s duration in <code>@keyframes flip</code></li>
+            <li><strong>Card Size:</strong> Modify <code>clamp()</code> values in <code>.flip-card</code></li>
+        </ul>
+
+        <h2>📄 File Information</h2>
+        <ul>
+            <li><strong>File:</strong> flip-clock.html</li>
+            <li><strong>Type:</strong> Single HTML file (no external dependencies)</li>
+            <li><strong>Size:</strong> ~15KB (extremely lightweight)</li>
+            <li><strong>Internet Required:</strong> Only for loading the Orbitron font (optional)</li>
+        </ul>
+
+        <h2>🎓 Keyboard Shortcuts Summary</h2>
+        <p style="text-align: center; font-size: 1.1rem; margin: 2rem 0;">
+            <span class="key">F</span> Fullscreen &nbsp;&nbsp;
+            <span class="key">T</span> Theme &nbsp;&nbsp;
+            <span class="key">H</span> 12h/24h &nbsp;&nbsp;
+            <span class="key">S</span> Font Panel &nbsp;&nbsp;
+            <span class="key">+</span>/<span class="key">-</span> Size
+        </p>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <p style="color: #94a3b8; font-size: 0.95rem;">Enjoy your beautiful flip clock! 🎉</p>
+        </div>
+    </div>
+
+
+</body></html>
