@@ -9,6 +9,7 @@
         :root {
             --bg-color: #000000;
             --text-color: #ffffff;
+            --digit-color: #ffffff;
             --card-bg: #1a1a1a;
             --card-shadow: rgba(255, 255, 255, 0.1);
             --separator-color: #333;
@@ -18,6 +19,7 @@
         [data-theme="light"] {
             --bg-color: #f5f5f5;
             --text-color: #000000;
+            --digit-color: #000000;
             --card-bg: #ffffff;
             --card-shadow: rgba(0, 0, 0, 0.1);
             --separator-color: #ddd;
@@ -163,7 +165,7 @@
         .digit {
             font-size: calc(clamp(80px, 14vw, 180px) * var(--font-size-multiplier));
             font-weight: 900;
-            color: var(--text-color);
+            color: var(--digit-color);
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             user-select: none;
             line-height: 1;
@@ -295,6 +297,17 @@
         }
 
         #theme-light.active {
+
+        /* Color button specific styles */
+        .color-btn {
+            font-size: 0.8rem;
+            padding: 0.5rem;
+        }
+
+        .color-btn.active {
+            border-width: 3px;
+            box-shadow: 0 0 0 2px var(--bg-color), 0 0 0 4px currentColor;
+        }
             background: #f5f5f5;
             color: #000000;
             border-color: #f5f5f5;
@@ -736,6 +749,22 @@
                 </div>
             </div>
 
+
+            <!-- Digit Color -->
+            <div class="menu-section">
+                <div class="menu-label">Digit Color</div>
+                <div class="menu-buttons" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
+                    <button class="menu-btn color-btn active" data-color="#ffffff" style="background: #ffffff; color: #000000; border-color: #ffffff;">White</button>
+                    <button class="menu-btn color-btn" data-color="#cccccc" style="background: #cccccc; color: #000000; border-color: #cccccc;">Gray</button>
+                    <button class="menu-btn color-btn" data-color="#60a5fa" style="background: #60a5fa; color: #000000; border-color: #60a5fa;">Blue</button>
+                    <button class="menu-btn color-btn" data-color="#34d399" style="background: #34d399; color: #000000; border-color: #34d399;">Green</button>
+                    <button class="menu-btn color-btn" data-color="#f87171" style="background: #f87171; color: #000000; border-color: #f87171;">Red</button>
+                    <button class="menu-btn color-btn" data-color="#fbbf24" style="background: #fbbf24; color: #000000; border-color: #fbbf24;">Yellow</button>
+                    <button class="menu-btn color-btn" data-color="#c084fc" style="background: #c084fc; color: #000000; border-color: #c084fc;">Purple</button>
+                    <button class="menu-btn color-btn" data-color="#fb923c" style="background: #fb923c; color: #000000; border-color: #fb923c;">Orange</button>
+                    <button class="menu-btn color-btn" data-color="#ec4899" style="background: #ec4899; color: #ffffff; border-color: #ec4899;">Pink</button>
+                </div>
+            </div>
             <!-- Fullscreen -->
             <div class="menu-section">
                 <div class="menu-label">Display</div>
@@ -760,7 +789,7 @@
 
     <!-- Keyboard hint -->
     <div class="hint">
-        F: fullscreen • T: theme • H: 12h/24h • G: settings • +/-: font size
+        F: fullscreen • T: theme • H: 12h/24h • C: color • G: settings • +/-: font size
     </div>
 
     <script>
@@ -926,6 +955,19 @@
 
                 // Listen for fullscreen changes
                 document.addEventListener('fullscreenchange', () => this.handleFullscreenChange());
+
+                // Color buttons
+                const colorButtons = document.querySelectorAll(".color-btn");
+                colorButtons.forEach(btn => {
+                    btn.addEventListener("click", () => {
+                        const color = btn.getAttribute("data-color");
+                        document.documentElement.style.setProperty("--digit-color", color);
+                        
+                        // Update active state
+                        colorButtons.forEach(b => b.classList.remove("active"));
+                        btn.classList.add("active");
+                    });
+                });
             }
 
             setupFontSizeControl() {
@@ -989,6 +1031,15 @@
                     themeLight.classList.add('active');
                     themeDark.classList.remove('active');
                 }
+                
+                // Reset digit color to theme default
+                const defaultColor = newTheme === "dark" ? "#ffffff" : "#000000";
+                document.documentElement.style.setProperty("--digit-color", defaultColor);
+                
+                // Reset color button active state to white
+                const colorButtons = document.querySelectorAll(".color-btn");
+                colorButtons.forEach(b => b.classList.remove("active"));
+                document.querySelector('.color-btn[data-color="#ffffff"]')?.classList.add('active');
             }
 
             toggleFullscreen() {
@@ -1064,6 +1115,22 @@
                         document.getElementById('size-value').textContent = `${Math.round(newValue * 100)}%`;
                     }
 
+
+                    // C key to cycle through digit colors
+                    if (e.key === "c" || e.key === "C") {
+                        e.preventDefault();
+                        const colorButtons = document.querySelectorAll(".color-btn");
+                        const activeButton = document.querySelector(".color-btn.active");
+                        let nextIndex = 0;
+                        
+                        colorButtons.forEach((btn, index) => {
+                            if (btn === activeButton) {
+                                nextIndex = (index + 1) % colorButtons.length;
+                            }
+                        });
+                        
+                        colorButtons[nextIndex].click();
+                    }
                     // ESC is handled by browser automatically for fullscreen
                 });
             }
