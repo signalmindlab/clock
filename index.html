@@ -19,7 +19,6 @@
         [data-theme="light"] {
             --bg-color: #f5f5f5;
             --text-color: #000000;
-            --digit-color: #000000;
             --card-bg: #ffffff;
             --card-shadow: rgba(0, 0, 0, 0.1);
             --separator-color: #ddd;
@@ -753,17 +752,7 @@
             <!-- Digit Color -->
             <div class="menu-section">
                 <div class="menu-label">Digit Color</div>
-                <div class="menu-buttons" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
-                    <button class="menu-btn color-btn active" data-color="#ffffff" style="background: #ffffff; color: #000000; border-color: #ffffff;">White</button>
-                    <button class="menu-btn color-btn" data-color="#cccccc" style="background: #cccccc; color: #000000; border-color: #cccccc;">Gray</button>
-                    <button class="menu-btn color-btn" data-color="#60a5fa" style="background: #60a5fa; color: #000000; border-color: #60a5fa;">Blue</button>
-                    <button class="menu-btn color-btn" data-color="#34d399" style="background: #34d399; color: #000000; border-color: #34d399;">Green</button>
-                    <button class="menu-btn color-btn" data-color="#f87171" style="background: #f87171; color: #000000; border-color: #f87171;">Red</button>
-                    <button class="menu-btn color-btn" data-color="#fbbf24" style="background: #fbbf24; color: #000000; border-color: #fbbf24;">Yellow</button>
-                    <button class="menu-btn color-btn" data-color="#c084fc" style="background: #c084fc; color: #000000; border-color: #c084fc;">Purple</button>
-                    <button class="menu-btn color-btn" data-color="#fb923c" style="background: #fb923c; color: #000000; border-color: #fb923c;">Orange</button>
-                    <button class="menu-btn color-btn" data-color="#ec4899" style="background: #ec4899; color: #ffffff; border-color: #ec4899;">Pink</button>
-                </div>
+                <div class="menu-buttons" id="color-buttons-container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;"></div>
             </div>
             <!-- Fullscreen -->
             <div class="menu-section">
@@ -815,6 +804,7 @@
                 this.setupControls();
                 this.setupKeyboardShortcuts();
                 this.setupFontSizeControl();
+                this.setupColorButtons();
             }
 
             updateTime() {
@@ -918,12 +908,18 @@
                     document.body.setAttribute('data-theme', 'dark');
                     themeDark.classList.add('active');
                     themeLight.classList.remove('active');
+                    const defaultColor = "#ffffff";
+                    document.documentElement.style.setProperty("--digit-color", defaultColor);
+                    this.setupColorButtons();
                 });
                 
                 themeLight.addEventListener('click', () => {
                     document.body.setAttribute('data-theme', 'light');
                     themeLight.classList.add('active');
                     themeDark.classList.remove('active');
+                    const defaultColor = "#000000";
+                    document.documentElement.style.setProperty("--digit-color", defaultColor);
+                    this.setupColorButtons();
                 });
 
                 // Format buttons (12h/24h)
@@ -955,19 +951,6 @@
 
                 // Listen for fullscreen changes
                 document.addEventListener('fullscreenchange', () => this.handleFullscreenChange());
-
-                // Color buttons
-                const colorButtons = document.querySelectorAll(".color-btn");
-                colorButtons.forEach(btn => {
-                    btn.addEventListener("click", () => {
-                        const color = btn.getAttribute("data-color");
-                        document.documentElement.style.setProperty("--digit-color", color);
-                        
-                        // Update active state
-                        colorButtons.forEach(b => b.classList.remove("active"));
-                        btn.classList.add("active");
-                    });
-                });
             }
 
             setupFontSizeControl() {
@@ -995,6 +978,77 @@
                     const newValue = Math.min(1.4, parseFloat(slider.value) + 0.1);
                     slider.value = newValue;
                     updateFontSize(newValue);
+                });
+            }
+
+            setupColorButtons() {
+                const isDark = document.body.getAttribute("data-theme") === "dark";
+                const container = document.getElementById("color-buttons-container");
+                
+                // Define color sets for dark and light themes
+                const darkThemeColors = [
+                    { color: "#ffffff", name: "White", textColor: "#000000" },
+                    { color: "#cccccc", name: "Gray", textColor: "#000000" },
+                    { color: "#60a5fa", name: "Blue", textColor: "#000000" },
+                    { color: "#34d399", name: "Green", textColor: "#000000" },
+                    { color: "#f87171", name: "Red", textColor: "#000000" },
+                    { color: "#fbbf24", name: "Yellow", textColor: "#000000" },
+                    { color: "#c084fc", name: "Purple", textColor: "#000000" },
+                    { color: "#fb923c", name: "Orange", textColor: "#000000" },
+                    { color: "#ec4899", name: "Pink", textColor: "#ffffff" }
+                ];
+                
+                const lightThemeColors = [
+                    { color: "#000000", name: "Black", textColor: "#ffffff" },
+                    { color: "#4b5563", name: "Gray", textColor: "#ffffff" },
+                    { color: "#2563eb", name: "Blue", textColor: "#ffffff" },
+                    { color: "#059669", name: "Green", textColor: "#ffffff" },
+                    { color: "#dc2626", name: "Red", textColor: "#ffffff" },
+                    { color: "#d97706", name: "Orange", textColor: "#ffffff" },
+                    { color: "#7c3aed", name: "Purple", textColor: "#ffffff" },
+                    { color: "#db2777", name: "Pink", textColor: "#ffffff" },
+                    { color: "#0891b2", name: "Cyan", textColor: "#ffffff" }
+                ];
+                
+                const colors = isDark ? darkThemeColors : lightThemeColors;
+                
+                let currentColor = getComputedStyle(document.documentElement).getPropertyValue("--digit-color").trim();
+                // Check if current color exists in the new theme palette
+                const colorExists = colors.some(c => c.color === currentColor);
+                
+                // If current color doesnt exist in new palette, set to first color
+                if (!colorExists) {
+                    document.documentElement.style.setProperty("--digit-color", colors[0].color);
+                    currentColor = colors[0].color;
+                }
+                // Clear existing buttons
+                container.innerHTML = "";
+                
+                // Create buttons
+                colors.forEach((colorData, index) => {
+                    const btn = document.createElement("button");
+                    btn.className = "menu-btn color-btn";
+                    btn.setAttribute("data-color", colorData.color);
+                    btn.style.background = colorData.color;
+                    btn.style.color = colorData.textColor;
+                    btn.style.borderColor = colorData.color;
+                    btn.textContent = colorData.name;
+                    
+                    // Set first button as active if no color is set or if it matches current color
+                    if (index === 0 && (currentColor === "" || currentColor === colorData.color)) {
+                        btn.classList.add("active");
+                    } else if (currentColor === colorData.color) {
+                        btn.classList.add("active");
+                    }
+                    
+                    // Add click event
+                    btn.addEventListener("click", () => {
+                        document.documentElement.style.setProperty("--digit-color", colorData.color);
+                        document.querySelectorAll(".color-btn").forEach(b => b.classList.remove("active"));
+                        btn.classList.add("active");
+                    });
+                    
+                    container.appendChild(btn);
                 });
             }
 
@@ -1032,14 +1086,11 @@
                     themeDark.classList.remove('active');
                 }
                 
-                // Reset digit color to theme default
+                
+                // Reset digit color to theme default and regenerate color buttons
                 const defaultColor = newTheme === "dark" ? "#ffffff" : "#000000";
                 document.documentElement.style.setProperty("--digit-color", defaultColor);
-                
-                // Reset color button active state to white
-                const colorButtons = document.querySelectorAll(".color-btn");
-                colorButtons.forEach(b => b.classList.remove("active"));
-                document.querySelector('.color-btn[data-color="#ffffff"]')?.classList.add('active');
+                this.setupColorButtons();
             }
 
             toggleFullscreen() {
